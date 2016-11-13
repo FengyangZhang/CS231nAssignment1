@@ -4,7 +4,7 @@ class KNearestNeighbor(object):
   """ a kNN classifier with L2 distance """
 
   def __init__(self):
-    print "init..."
+    print "inited a new KNN classifier"
     pass
 
   def train(self, X, y):
@@ -95,8 +95,8 @@ class KNearestNeighbor(object):
       # points, and store the result in dists[i, :].                        #
       #######################################################################
       sqr=(X[i] - self.X_train) * (X[i] - self.X_train)
-      temp=np.ones((sqr.shape[1], 1))
-      dists[i, :]=np.sqrt(np.dot(sqr, temp))[:, 0]
+      temp=np.ones(sqr.shape[1])
+      dists[i, :]=np.sqrt(np.dot(sqr, temp))
       #######################################################################
       #                         END OF YOUR CODE                            #
       #######################################################################
