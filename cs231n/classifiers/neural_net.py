@@ -74,7 +74,9 @@ class TwoLayerNet(object):
     # Store the result in the scores variable, which should be an array of      #
     # shape (N, C).                                                             #
     #############################################################################
-    pass
+    z1 = np.dot(X, W1) + b1
+    l1 = np.maximum(0, z1)
+    scores = np.dot(l1, W2) + b2 
     #############################################################################
     #                              END OF YOUR CODE                             #
     #############################################################################
@@ -84,7 +86,7 @@ class TwoLayerNet(object):
       return scores
 
     # Compute the loss
-    loss = None
+    loss = 0
     #############################################################################
     # TODO: Finish the forward pass, and compute the loss. This should include  #
     # both the data loss and L2 regularization for W1 and W2. Store the result  #
@@ -92,7 +94,12 @@ class TwoLayerNet(object):
     # classifier loss. So that your results match ours, multiply the            #
     # regularization loss by 0.5                                                #
     #############################################################################
-    pass
+    probs = np.exp(scores) / np.sum(np.exp(scores), 1, keepdims = True)
+    
+    loss += -np.sum(np.log(probs[xrange(N), y])) / N
+    
+    loss += 0.5 * reg * np.sum(W1 * W1) + 0.5 * reg * np.sum(W2 * W2)
+    
     #############################################################################
     #                              END OF YOUR CODE                             #
     #############################################################################
